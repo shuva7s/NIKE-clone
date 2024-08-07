@@ -2,32 +2,133 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: #ffffff;
+    --foreground: #2e2e2e;
+    --card: #ffffff;
+    --card-foreground: #2e2e2e;
+    --popover: #ffffff;
+    --popover-foreground: #2e2e2e;
+    --primary: #cdff00;
+    --primary-foreground: #d1eaff;
+    --secondary: #d1eaff;
+    --secondary-foreground: #1c1c1c;
+    --muted: #d1eaff;
+    --muted-foreground: #707070;
+    --accent: #d1eaff;
+    --accent-foreground: #1c1c1c;
+    --destructive: #ff2e2e;
+    --destructive-foreground: #d1eaff;
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: #2e2e2e;
+    --radius: 0.5rem;
+    --chart-1: #e68f00;
+    --chart-2: #23a848;
+    --chart-3: #347e99;
+    --chart-4: #ff883a;
+    --chart-5: #ffbf45;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #212121;
+      --foreground: #ffffff;
+      --card: #2e2e2e;
+      --card-foreground: #d1eaff;
+      --popover: #2e2e2e;
+      --popover-foreground: #d1eaff;
+      --primary: #cdff00;
+      --primary-foreground: #0c0c0c;
+      --secondary: #b3b3b3;
+      --secondary-foreground: #dfdfdf;
+      --muted: #2c4b2c;
+      --muted-foreground: #353535;
+      --accent: #ffffff;
+      --accent-foreground: #c2c2c2;
+      --destructive: #9d1e1e;
+      --destructive-foreground: #d1eaff;
+      --border: #ffffff;
+      --input: #2c4b2c;
+      --ring: #36436d;
+      --chart-1: #3770b0;
+      --chart-2: #4c3ca2;
+      --chart-3: #4cc837;
+      --chart-4: #38a3f0;
+      --chart-5: #f0558e;
+    }
+    .invert {
+      filter: invert(1);
+    }
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .wrapper {
+    @apply mx-12 max-md:mx-6;
+  }
+  .aspect-10-5 {
+    aspect-ratio: 10 / 5;
+  }
+  .aspect-10-12 {
+    aspect-ratio: 10 / 12;
+  }
+
+  .aspect-10-3 {
+    aspect-ratio: 10 / 3;
+  }
+  .aspect-1 {
+    aspect-ratio: 1;
+  }
+
+  .trans::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 35%;
+    background: linear-gradient(to bottom, var(--background), transparent);
+  }
+  /* .aspect-10-12::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 27%;
+    background: linear-gradient(to bottom, var(--background), transparent);
+  } */
+  .banner-image {
+    background-image: url("/nikeBanner.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .head-bold-text {
+    font-size: clamp(1rem, 7vw, 5rem);
+    font-weight: 800;
+    letter-spacing: calc(0px - clamp(1px, 0.5vw, 4px));
+    line-height: calc(clamp(1rem, 7vw, 5rem) - clamp(0.2rem, 2vw, 1.7rem));
+  }
+  .grid-cols-minmax {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .underln::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--border);
   }
 }
